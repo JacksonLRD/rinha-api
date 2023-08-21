@@ -57,10 +57,10 @@ export default function CustomRouter() {
   function _ErrorHandler(response) {
     return (error) => {
       console.error("FATAL ERROR", error);
-      response.writeHead(500, DEFAULT_HEADER);
+      response.writeHead(error.status || 500, DEFAULT_HEADER);
       response.write(
         JSON.stringify({
-          error: "Internal Server Error",
+          error: error.message || "Internal Server Error",
         })
       );
 
